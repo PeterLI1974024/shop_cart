@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/component/item_tile.dart';
@@ -15,6 +17,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Color.fromARGB(255, 203, 131, 216),
+          child: Icon(Icons.shopping_bag),
+        ),
         backgroundColor: Color.fromARGB(255, 242, 224, 226),
         body: SafeArea(
           child:
@@ -37,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 'fresh item',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 22),
               ),
             ),
             SizedBox(
@@ -47,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               return GridView.builder(
                 itemCount: value.shopItems.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                    crossAxisCount: 2, childAspectRatio: 1 / 1.1),
                 itemBuilder: ((context, index) {
                   return ItemTile(
                     name: value.shopItems[index][0],

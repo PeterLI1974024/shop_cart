@@ -11,16 +11,16 @@ class Cart extends ChangeNotifier {
     [
       'U.S Choice',
       '6.20',
-      'lib/images/meat.png',
-      Colors.yellow,
+      'lib/images/meat1.png',
+      Color.fromARGB(255, 210, 198, 94),
     ],
     [
       'U.S Select',
       '4.20',
-      'lib/images/meat.png',
+      'lib/images/meat2.png',
       Colors.green,
     ],
-    ['U.S Utility', '2.05', 'lib/images/meat.png', Colors.amber]
+    ['U.S Utility', '2.05', 'lib/images/meat3.png', Colors.amber]
   ];
 
   get shopItems => _shopItems;

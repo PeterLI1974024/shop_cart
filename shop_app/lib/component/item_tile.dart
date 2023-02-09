@@ -5,13 +5,15 @@ class ItemTile extends StatelessWidget {
   final String price;
   final String image;
   final colour;
+  void Function()? onPressed;
 
-  const ItemTile(
+  ItemTile(
       {super.key,
       required this.name,
       required this.price,
       required this.image,
-      required this.colour});
+      required this.colour,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class ItemTile extends StatelessWidget {
             ),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             color: colour,
             child: Text(
               price,

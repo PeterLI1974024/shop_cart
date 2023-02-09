@@ -1,10 +1,11 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/component/item_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/model/cart_model.dart';
+import 'package:shop_app/pages/description.dart';
+import 'list_page.dart';
+import 'description.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ListPage();
+            }));
+          },
           backgroundColor: Color.fromARGB(255, 203, 131, 216),
           child: Icon(Icons.shopping_bag),
         ),
@@ -38,29 +43,45 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 60,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
-                'fresh item',
+                'Ｍeat Type',
                 style: TextStyle(fontSize: 22),
               ),
             ),
             SizedBox(
-              height: 60,
+              height: 20,
             ),
-            Expanded(child: Consumer<Cart>(builder: (((context, value, child) {
+            Expanded(child: Consumer<Cart>(builder: (((context, cart, child) {
               return GridView.builder(
-                itemCount: value.shopItems.length,
+                itemCount: cart.shopItems.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, childAspectRatio: 1 / 1.1),
                 itemBuilder: ((context, index) {
-                  return ItemTile(
-                    name: value.shopItems[index][0],
-                    price: value.shopItems[index][1],
-                    image: value.shopItems[index][2],
-                    colour: value.shopItems[index][3],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return Description(
+                          image: cart.shopItems[index][2],
+                          desc: cart.shopItems[index][4],
+                          index: index,
+                          name: cart.shopItems[index][0],
+                        );
+                      })));
+                    },
+                    child: ItemTile(
+                      name: cart.shopItems[index][0],
+                      price: cart.shopItems[index][1],
+                      image: cart.shopItems[index][2],
+                      colour: cart.shopItems[index][3],
+                      onPressed: () {
+                        cart.addItemToCart(index);
+                      },
+                    ),
                   );
                 }),
               );
